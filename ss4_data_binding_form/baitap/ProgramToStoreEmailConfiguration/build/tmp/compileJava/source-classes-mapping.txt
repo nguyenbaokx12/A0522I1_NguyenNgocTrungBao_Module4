@@ -1,0 +1,4 @@
+com/example/model/Mail.java
+ com.example.model.Mail
+com/example/controller/MailController.java
+ com.example.controller.MailController
