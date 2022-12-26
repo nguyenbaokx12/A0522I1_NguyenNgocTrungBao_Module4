@@ -1,0 +1,4 @@
+com/example/model/MedicalDeclaration.java
+ com.example.model.MedicalDeclaration
+com/example/controller/MedicalDeclarationController.java
+ com.example.controller.MedicalDeclarationController
