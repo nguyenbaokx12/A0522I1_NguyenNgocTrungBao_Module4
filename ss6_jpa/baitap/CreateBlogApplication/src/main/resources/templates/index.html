@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="js/bootstrap.min.js">
+</head>
+<body>
+
+
+<h3>Blog Application</h3>
+<div class="container">
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <form class="d-flex" th:action="@{/blog/search}" >
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword" >
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+</div>
+<p>
+    <a th:href="@{/blog/create}">
+        Add New Product
+    </a>
+</p>
+
+<div class="notify">
+    <div th:if="${message}">
+        <span th:text="${message}"></span>
+    </div>
+</div>
+
+<table id = "layout">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Detai</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row : ${blogList}">
+        <td th:text="${row.id}"></td>
+        <td th:text="${row.name}"></td>
+        <td th:text="${row.detail}"></td>
+        <td><a th:href="@{/blog/{id}/editshow(id=${row.id})}">Edit</a></td>
+        <td><a th:href="@{/blog/{id}/delete(id=${row.id})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
