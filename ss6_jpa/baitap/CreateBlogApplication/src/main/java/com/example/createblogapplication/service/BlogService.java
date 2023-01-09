@@ -4,7 +4,6 @@ import com.example.createblogapplication.model.Blog;
 import com.example.createblogapplication.repository.IBlogRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 

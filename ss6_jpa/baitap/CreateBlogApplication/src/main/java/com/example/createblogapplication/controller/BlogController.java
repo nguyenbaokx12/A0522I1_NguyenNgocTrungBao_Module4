@@ -1,6 +1,5 @@
 package com.example.createblogapplication.controller;
 
-
 import com.example.createblogapplication.model.Blog;
 import com.example.createblogapplication.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -52,17 +50,17 @@ public class BlogController {
         return "redirect:/blog/list";
     }
 
-    @GetMapping("{id}/edit")
-    public  String editShow(@PathVariable Integer id, Model model){
+    @GetMapping ("{id}/editshow")
+    public String editshow(Model model,@PathVariable Integer id){
         Optional<Blog> blog = iBlogService.getById(id);
         model.addAttribute("blog",blog);
-        return "delete";
+        return "edit";
     }
 
     @PostMapping("edit")
-    public String edit(@ModelAttribute Blog blog, RedirectAttributes redirectAttributes){
+    public String edit(@ModelAttribute Blog blog, RedirectAttributes redirectAttributes) {
         iBlogService.save(blog);
-        redirectAttributes.addFlashAttribute("message", "save thanh cong");
+        redirectAttributes.addFlashAttribute("message", "edit thanh cong");
         return "redirect:/blog/list";
     }
 }

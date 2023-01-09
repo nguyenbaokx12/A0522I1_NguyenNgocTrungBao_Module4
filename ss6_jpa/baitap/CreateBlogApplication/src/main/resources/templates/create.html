@@ -4,7 +4,7 @@
 <body>
 <h3>Add Blog</h3>
 <p>
-    <a th:href="@{/blog}">
+    <a th:href="@{/blog/list}">
         Back to Blog list
     </a>
 </p>
@@ -16,7 +16,6 @@
         <label>Detail</label>
         <input type="text" th:field="*{detail}">
         <input type="submit" value="save">
-
     </form>
 </div>
 <footer th:replace="/view :: footer"></footer>
