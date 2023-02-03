@@ -18,12 +18,12 @@ public class Song {
 
     @NotBlank(message = "Tên bài hát không được để trống")
     @Size(min = 0, max = 800, message = "Không vượt qua 800 ký tự")
-    @Pattern(regexp = "^[^\\;\\,\\.\\=\\-\\+]+$", message = "Dữ liệu không hợp lệ")
+    @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Dữ liệu không hợp lệ")
     private String nameSong;
 
     @NotBlank(message = "Tên nghệ sĩ không được để trống")
     @Size(min = 0, max = 300, message = "Không vượt qua 300 ký tự")
-    @Pattern(regexp = "^[^\\;\\,\\.\\=\\-\\+]+$", message = "Dữ liệu không hợp lệ")
+    @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Dữ liệu không hợp lệ")
     private String nameSinger;
 
     @NotBlank(message = "Tên thể loại không được để trống")
