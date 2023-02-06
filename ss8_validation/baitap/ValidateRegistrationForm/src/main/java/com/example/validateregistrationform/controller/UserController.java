@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -30,13 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    private String create(@ModelAttribute @Validated UserDto userDto,
-                          BindingResult bindingResult,
-                          RedirectAttributes redirectAttributes,
-                          Model model,
-                          @PageableDefault(value = 10) Pageable pageable
-    ){
-
+    private String create(@ModelAttribute @Validated UserDto userDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model, @PageableDefault(value = 10) Pageable pageable){
         new UserDto().validate(userDto,bindingResult);
         if (bindingResult.hasFieldErrors()){
             return "create";

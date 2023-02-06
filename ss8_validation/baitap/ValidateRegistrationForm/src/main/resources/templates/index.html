@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/layout :: head">
-
 </head>
 <body>
-
-
 <h3>Blog</h3>
 <div class="container">
     <nav class="navbar navbar-light bg-light">
@@ -26,21 +23,16 @@
 
     </select>
 </form>
-
 <p>
     <a th:href="@{/createShow}">
         Add new Blog
     </a>
 </p>
-
-
-
 <div class="notify">
     <div th:if="${message}">
         <span th:text="${message}"></span>
     </div>
 </div>
-
 <table id = "layout">
     <thead>
     <tr>
@@ -49,9 +41,9 @@
         <th>Last Name</th>
         <th>Phone Number</th>
         <th>Mail</th>
+        <th>Age</th>
         <th>Delete</th>
         <th>Edit</th>
-
     </tr>
     </thead>
     <tbody>
@@ -60,15 +52,13 @@
         <td th:text="${row.firstName}"></td>
         <td th:text="${row.lastName}"></td>
         <td th:text="${row.phone}"></td>
-        <td th:text="${row.mail}"></td>
+        <td th:text="${row.email}"></td>
         <td th:text="${row.age}"></td>
         <td><a th:href="@{/{id}/editShow(id=${row.id})}">Edit</a></td>
         <td><a th:href="@{/{id}/delete(id=${row.id})}">Delete</a></td>
     </tr>
     </tbody>
 </table>
-
-
 <footer th:replace="/layout :: footer"></footer>
 </body>
 </html>

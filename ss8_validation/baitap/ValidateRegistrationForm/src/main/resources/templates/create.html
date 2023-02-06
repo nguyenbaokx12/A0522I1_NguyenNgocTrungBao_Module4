@@ -179,12 +179,12 @@
     <form th:action="@{/create}" th:object="${userDto}" method="post">
         <div class="user-box">
             <input type="text" th:field="*{firstName}" required="">
-            <label>Last Name</label>
+            <label>First Name</label>
             <div style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
         </div>
         <div class="user-box">
             <input type="text" th:field="*{lastName}" required="">
-            <label>First Name</label>
+            <label>Last Name</label>
             <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
         </div>
         <div class="user-box">
@@ -193,9 +193,9 @@
             <div style="color: red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
         </div>
         <div class="user-box">
-            <input type="text" th:field="*{mail}" required="">
+            <input type="text" th:field="*{email}" required="">
             <label>Mail</label>
-            <div style="color: red" th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"></div>
+            <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
         </div>
         <div class="user-box">
             <input type="text" th:field="*{age}" required="">
