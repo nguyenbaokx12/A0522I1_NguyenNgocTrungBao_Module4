@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/head">
+<body>
+<div class="main">
+    <div th:replace="fragment/menubar"></div>
+    <div class="container">
+        <form th:action="@{/books/create}" method="post" th:object="${book}">
+            <table>
+                <tr>
+                    <td>Title</td>
+                    <td><input type="text" th:field="*{title}"></td>
+                </tr>
+                <tr>
+                    <td>Author</td>
+                    <td><input type="text" th:field="*{author}"></td>
+                </tr>
+                <tr>
+                    <td>Quantity</td>
+                    <td><input type="text" th:field="*{quantity}"></td>
+                </tr>
+                <tr>
+                    <td>Year composed</td>
+                    <td><input type="text" th:field="*{year}"></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Add book</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>
