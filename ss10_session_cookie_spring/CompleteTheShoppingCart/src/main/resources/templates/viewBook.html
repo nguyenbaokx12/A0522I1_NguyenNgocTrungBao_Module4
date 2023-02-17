@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      background: -webkit-linear-gradient(45deg, #49a09d, #5f2c82);
+      background: linear-gradient(45deg, #49a09d, #5f2c82);
+      font-family: sans-serif;
+      font-weight: 100;
+    }
+    /*.container-fluid {*/
+    /*    position: absolute;*/
+    /*    top: 50%;*/
+    /*    left: 50%;*/
+    /*    -webkit-transform: translate(-50%, -50%);*/
+    /*    transform: translate(-50%, -50%);*/
+    /*}*/
+    table {
+
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    th,
+    td {
+      padding: 15px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: pink;
+    }
+    th {
+      text-align: left;
+    }
+    thead th {
+      background-color: #55608f;
+    }
+    tbody tr:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+    tbody td {
+      position: relative;
+    }
+    tbody td:hover:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -9999px;
+      bottom: -9999px;
+      background-color: rgba(255, 255, 255, 0.2);
+      z-index: -1;
+    }
+
+  </style>
+</head>
+<body>
+
+<div>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>IdCard</th>
+      <th>Total</th>
+      <th>Name</th>
+      <th>Author</th>
+      <th>Detail</th>
+      <th>Borrow Book</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr >
+      <td th:text="${book.id}"></td>
+      <td th:text="${book.idCard}"></td>
+      <td th:text="${book.toTal}"></td>
+      <td th:text="${book.name}"></td>
+      <td th:text="${book.detail}"></td>
+      <td th:text="${book.author}"></td>
+      <td th:href="@{/book/{id}/viewBook(id=${book.id})}">Borrow Book</td>
+
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+<div>
+  <a th:href="@{/book}">Back Book</a>
+</div>
+</body>
+</html>
