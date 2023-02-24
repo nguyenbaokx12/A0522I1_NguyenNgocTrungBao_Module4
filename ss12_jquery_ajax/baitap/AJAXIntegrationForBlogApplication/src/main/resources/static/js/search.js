@@ -21,6 +21,7 @@ function search() {
             }
             $("#blogs-list").html(result);
             $("#pagination").hide();
+            $("#hide").hide();
         }
     });
 }

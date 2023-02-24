@@ -22,7 +22,7 @@
     <div style="width: 60%">
         <h2>Danh sách các bài viết</h2>
 
-        <input placeholder="Nhập tên tiêu đề" style="float: left" type="text" id="title">
+        <input required placeholder="Nhập tên tiêu đề" style="float: left" type="text" id="title">
         <button  style="float: left" type="text" onclick="search()">Search</button>
         <form action="">
             <select th:name="category_filter" onchange="this.form.submit()">
@@ -61,10 +61,14 @@
         <span id="pagination">
             <button onclick="load()">Tải thêm</button>
         </span>
+        <span id="hide">
+            <button onclick="load()">Ẩn bớt</button>
+        </span>
     </div>
 <script src="/js/jquery.js"></script>
 <script src="/js/search.js"></script>
 <script src="/js/load.js"></script>
+<script src="/js/hide.js"></script>
 </body>
 </body>
 </html>
