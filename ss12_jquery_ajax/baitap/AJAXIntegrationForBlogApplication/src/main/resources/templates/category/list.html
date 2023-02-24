@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    table, th, td {
+        border:1px solid black;
+    }
+    button>a{
+        color: black;
+        text-decoration: none;
+    }
+</style>
+<body>
+<h1>Danh sách các thể loại</h1>
+<table>
+    <tr>
+        <td>
+            <button><a th:href="@{/category/create}">Thêm mới category</a></button>
+        </td>
+        <td>
+            <button><a th:href="@{/blog}">Quay lại trang blog</a></button>
+        </td>
+    </tr>
+</table>
+
+<table style="width: 257px !important;">
+    <tr>
+        <th>Id</th>
+        <th>Tên thể loại</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="cat : ${listCategory}">
+        <td th:text="${cat.id}"></td>
+        <td th:text="${cat.nameCategory}"></td>
+        <td>
+            <a th:href="@{/edit/__${cat.id}__}">Edit</a>
+            <a th:href="@{/delete/__${cat.id}__}">Delete</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
