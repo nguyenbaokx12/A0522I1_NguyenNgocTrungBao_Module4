@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        h1 {
+            font-size: 30px;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .tbl-header {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .tbl-content {
+            height: 300px;
+            overflow-x: auto;
+            margin-top: 0px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        th {
+            padding: 20px 15px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 12px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 15px;
+            text-align: left;
+            vertical-align: middle;
+            font-weight: 300;
+            font-size: 12px;
+            color: #fff;
+            border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+        }
+
+
+        /* demo styles */
+
+        @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+        body {
+            background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+            background: linear-gradient(to right, #25c481, #25b7c4);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        section {
+            margin: 50px;
+        }
+
+
+        /* follow me template */
+        .made-with-love {
+            margin-top: 40px;
+            padding: 10px;
+            clear: left;
+            text-align: center;
+            font-size: 10px;
+            font-family: arial;
+            color: #fff;
+        }
+
+        .made-with-love i {
+            font-style: normal;
+            color: #F50057;
+            font-size: 14px;
+            position: relative;
+            top: 2px;
+        }
+
+        .made-with-love a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .made-with-love a:hover {
+            text-decoration: underline;
+        }
+
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar">
+        <div class="container-fluid">
+            <form class="d-flex" action="/furama/customer">
+                <input class="form-control me-2" type="search" placeholder="Search name" aria-label="Search"
+                       name="key_search">
+                <button class="bg-success btn btn-outline-dark" type="submit">Search</button>
+
+                <select name="customerTypeId" onchange="this.form.submit()" class="form-control me-2" style="margin-left: 10px">
+                    <option disabled selected>Choose CustomerType</option>
+                    <th:block th:each="customerType: ${customerTypeList}">
+                        <option th:value="${customerType.id}" th:text="${customerType.name}"></option>
+                    </th:block>
+
+                </select>
+            </form>
+        </div>
+    </nav>
+</div>
+
+<div class="notify">
+    <div th:if="${message}"  >
+        <span th:text="${message}"  style="color: white;margin-top: 15px;margin-left: 13px"></span>
+    </div>
+</div>
+
+<div class="d-flex bd-highlight">
+    <div class="p-2 flex-fill bd-highlight"> <a class="bg-success btn btn-outline-dark" th:href="@{/furama/addShow}">
+        Add Customer</a></div>
+    <div class="p-2 flex-fill bd-highlight"> <h1 th:text="#{customer.customer_table}" style="margin-right: 455px"></h1></div>
+
+</div>
+
+<div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0" class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th th:text="#{customer.name}"></th>
+            <th th:text="#{customer.address}"></th>
+            <th>Email</th>
+            <th th:text="#{edit}"></th>
+            <th th:text="#{delete}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer : ${customerList}">
+            <td th:text="${customer.id}"></td>
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.address}"></td>
+            <td th:text="${customer.email}"></td>
+
+            <td>
+                <a class="bg-success btn btn-outline-dark" th:href="@{/furama/{id}/editShow(id=${customer.id})}">
+                    Edit</a>
+            </td>
+            <td>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        th:data-bs-target="'#exampleModal'+${customer.id}">
+                Delete
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" th:id="'exampleModal'+${customer.id}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p style="color: #F50057">
+                                    Ban muon xoa customer
+                                </p>
+                                <p   th:text="${customer.name}" style="color: #F50057"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <a class="bg-success btn btn-outline-danger"
+                                   th:href="@{/furama/{id}/delete(id=${customer.id})}">Delete</a></div>
+                        </div>
+                    </div>
+                </div>
+
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <a th:href="@{'/furama/customer'(page=${customerList.number - 1}, key_search=${key_search},customerTypeId=${customerTypeId})}"
+       th:if="${customerList.hasPrevious()}">Previous</a>
+    <span th:text="${customerList.number + 1}"></span> / <span th:text="${customerList.totalPages}"></span>
+    <a th:href="@{'/furama/customer'(page=${customerList.number + 1}, key_search=${key_search},customerTypeId=${customerTypeId})}"
+       th:if="${customerList.hasNext()}">Next</a>
+</div>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</html>
