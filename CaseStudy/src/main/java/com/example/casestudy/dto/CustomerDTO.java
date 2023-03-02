@@ -8,16 +8,21 @@ import javax.validation.constraints.Pattern;
 public class CustomerDTO {
     private Long id;
     private CustomerType customerTypeId;
+    @NotBlank
     private String name;
+
     private String birthDay;
     private String gender;
+
     @NotBlank
     @Pattern(message = "CMND phải đúng định dạng XXXXXXXXX hoặc XXXXXXXXXXXX (X là số 0-9)", regexp =  "[0-9]{9}")
     private String card;
+
     @NotBlank
     @Pattern(message = "Số điện thoại phải đúng định dạng 090xxxxxxx hoặc 091xxxxxxx hoặc (84)+90xxxxxxx hoặc (84)+91xxxxxxx",
             regexp = "^(090\\d{7})|(091\\d{7})|(8490\\d{7})|(8491\\d{7})|(082\\d{7})$")
     private String phone;
+
     @NotBlank
     @Pattern(message = "Địa chỉ email phải đúng định dạng email",regexp = "^([\\w]*[\\w\\.]*(?!\\.)@gmail.com)")
     private String email;
@@ -98,6 +103,7 @@ public class CustomerDTO {
     public void setAddress(String address) {
         this.address = address;
     }
+
 
     @Override
     public String toString() {

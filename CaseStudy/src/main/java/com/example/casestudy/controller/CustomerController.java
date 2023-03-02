@@ -29,10 +29,10 @@ public class CustomerController {
 
     @GetMapping("customer")
     public String getAllCustomer(Model model,
-                                 @PageableDefault(value = 2) Pageable pageable,
-                                 @RequestParam(defaultValue = "") String key_search,
+                                 @PageableDefault(value = 4) Pageable pageable,
+                                 @RequestParam(defaultValue = "") String key_searchname,
                                  @RequestParam(defaultValue = "") String customerTypeId) {
-        model.addAttribute("customerList", customerService.find(key_search, customerTypeId, pageable));
+        model.addAttribute("customerList", customerService.find(key_searchname, customerTypeId, pageable));
         model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
         return "customer";
     }
@@ -58,8 +58,6 @@ public class CustomerController {
             redirectAttributes.addFlashAttribute("message", " add complete");
             return "redirect:/furama/customer";
         }
-
-
     }
 
     @GetMapping("{id}/delete")
@@ -90,8 +88,7 @@ public class CustomerController {
             customerService.edit(customer);
             redirectAttributes.addFlashAttribute("message","edit customer complete");
             return "redirect:/furama/customer";
-
         }
-
     }
+
 }

@@ -10,11 +10,12 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface ICustomerRepository extends JpaRepository<Customer,Long> {
-@Query(value="SELECT * FROM  customer where name like concat('%',:customerName,'%') " +
-        "and customer_type_id_id like concat('%',:customerTypeId,'%')", nativeQuery=true)
-Page<Customer> searchCustomer(@Param("customerName") String customerName,
-                              @Param("customerTypeId") String customerTypeId,
-                              Pageable pagle);
-
+public interface ICustomerRepository extends JpaRepository<Customer, Long> {
+    @Query(value="SELECT * FROM  customer where name like concat('%',:customerName,'%') "
+//            +    "and  customer like concat('%',:customerPhone,'%') "
+            +    "and customer_type_id_id like concat('%',:customerTypeId,'%')", nativeQuery=true)
+    Page<Customer> searchCustomer(@Param("customerName") String customerName,
+//                                  @Param("customerPhone") String customerPhone,
+                                  @Param("customerTypeId") String customerTypeId,
+                                  Pageable pagle);
 }

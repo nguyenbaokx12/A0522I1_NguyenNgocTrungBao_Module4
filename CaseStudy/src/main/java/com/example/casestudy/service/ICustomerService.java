@@ -9,7 +9,6 @@ import java.util.List;
 
 
 public interface ICustomerService {
-//    Page<Customer> findAll(Pageable pageable);
 
     void remote(Long id);
 
