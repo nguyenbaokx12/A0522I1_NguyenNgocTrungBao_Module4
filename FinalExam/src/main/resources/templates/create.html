@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new promotion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<style>
+
+    form {
+        background-color: #ffffff;
+    }
+
+    body {
+        background-color: #f0f0f0;
+    }
+</style>
+<body>
+<div class="container">
+    <h1 class="text-center mb-4">THÊM MỚI KHUYẾN MÃI</h1>
+    <div th:if="${not #strings.isEmpty(mess)}" class="alert alert-danger" role="alert">
+        <p th:text="${mess}"></p>
+    </div>
+    <form style="border: 1px solid; padding: 20px 50px !important;border-radius: 8px" th:action="@{/create}" method="post" th:object="${promotionlist}">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="title" class="form-label">TIÊU ĐỀ</label>
+                <input type="text" class="form-control" id="title" th:field="*{title}">
+                <span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+            </div>
+            <div class="col-md-6">
+                <label for="subPromotion" class="form-label">MỨC GIẢM GIÁ</label>
+                <select id="subPromotion" class="form-select" th:field="*{subPromotion}">
+                    <option value="">Select</option>
+                    <option th:each="type : ${subpromotionlist}" th:value="${type.id}" th:text="${type.name}"></option>
+                </select>
+                <span class="text-danger" th:if="${#fields.hasErrors('subPromotion')}" th:errors="*{subPromotion}"></span>
+            </div>
+            <div class="col-md-6">
+                <label for="begin" class="form-label">NGÀY BẮT ĐẦU</label>
+                <input type="date" class="form-control" id="begin" th:field="*{begin}">
+                <span class="text-danger" th:if="${#fields.hasErrors('begin')}" th:errors="*{begin}"></span>
+            </div>
+            <div class="col-md-6">
+                <label for="end" class="form-label">NGÀY KẾT THÚC</label>
+                <input type="date" class="form-control" id="end" th:field="*{end}">
+                <span class="text-danger" th:if="${#fields.hasErrors('end')}" th:errors="*{end}"></span>
+            </div>
+            <div class="col-md-6">
+                <label for="title" class="form-label">CHI TIẾT</label>
+                <input type="text" class="form-control" id="content" th:field="*{content}">
+                <span class="text-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
+            </div>
+            <div class="col-md-6 " style="margin-top: 47px !important; padding-left: 100px !important;">
+                <button  type="submit" class="btn btn-primary">Submit</button>
+                <a class="btn btn-primary" href="/list">QUAY LẠI</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

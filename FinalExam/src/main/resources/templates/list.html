@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Khuyến Mãi</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+        .container {
+            padding: 20px;
+        }
+        h1 {
+            color: #555;
+            margin-bottom: 30px;
+        }
+        a.add-promotion {
+            margin-bottom: 20px;
+        }
+        form.search-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        input.search-input {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+        input.search-submit {
+            background-color: aqua;
+            color: darkblue;
+        }
+        h3.message {
+            color: red;
+            margin-bottom: 20px;
+        }
+        table.promotions {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        table.promotions thead th {
+            background-color: #343a40;
+            color: #fff;
+        }
+        table.promotions tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        button.edit-promotion {
+            background-color: aquamarine;
+            color: red;
+        }
+        button.delete-promotion {
+            background-color: black;
+            color: aqua;
+        }
+        .modal-header {
+            background-color: #343a40;
+            color: #fff;
+        }
+        .modal-title {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>DANH SÁCH KHUYẾN MÃI</h1>
+    <a class="btn btn-primary add-promotion" th:href="@{/create}">THÊM MỚI KHUYẾN MÃI</a>
+    <form class="search-form" th:action="@{/search}" method="get">
+        <input class="form-control search-input" type="text" name="nameSearch" placeholder="TÌM KIẾM...">
+        <input class="btn btn-primary search-submit" type="submit" value="TÌM KIẾM">
+    </form>
+    <div th:if="${mess}" class="message">
+        <h3 th:text="${mess}"></h3>
+    </div>
+    <table class="table table-striped promotions">
+        <thead>
+        <tr>
+            <th hidden>ID</th>
+            <th>TIÊU ĐỀ</th>
+            <th>NGÀY BẮT ĐẦU</th>
+            <th>NGÀY KẾT THÚC</th>
+            <th>CHI TIẾT</th>
+            <th>MỨC GIẢM GIÁ</th>
+            <th>CHỨC NĂNG</th>
+        </tr>
+        </thead>
+        <tbody th:each="promotion, iterStat: ${promotionlist}">
+        <tr th:object="${promotion}">
+            <td hidden th:text="${promotion.id}"></td>
+            <td th:text="${promotion.title}"></td>
+            <td th:text="*{#dates.format(begin, 'dd/MM/yyyy')}"></td>
+            <td th:text="*{#dates.format(end, 'dd/MM/yyyy')}"></td>
+            <td th:text="${promotion.content}"></td>
+            <td th:text="${promotion.subPromotion.name}"></td>
+            <td>
+                <button type="button" class="btn btn-primary btn-sm">
+                    <a href="@{/promotion/{id}/edit(id = ${promotion.getId()})}" style="color: white">SỬA</a>
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" th:data-id="*{id}" th:data-title="*{title}" th:onclick="deleteInfo(this.getAttribute('data-id'),this.getAttribute('data-title'))">
+                    XOÁ
+                </button>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="/delete" method="get">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Customer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input hidden name="id" id="id">
+                        <span>Do you want delete </span><span id="deleteName"></span><span>?</span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Yes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function deleteInfo(id,title) {
+        document.getElementById("id").value=id;
+        document.getElementById("deleteName").innerText=title;
+    }
+</script>
+</body>
+</html>
